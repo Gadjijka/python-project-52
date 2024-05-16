@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     "webserver",
     "localhost",
     "127.0.0.1",
+    "python-project-52-eo7y.onrender.com"
 ]
 
 
