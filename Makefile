@@ -1,4 +1,4 @@
 install:
 	poetry install
 start:
-	gunicorn task_manager.wsgi:application
+	poetry run gunicorn task_manager.wsgi:application
