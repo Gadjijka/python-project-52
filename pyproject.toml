@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 gunicorn = "^22.0.0"
 django = "^5.0.6"
+django-bootstrap5 = "^24.2"
 
 
 [build-system]
