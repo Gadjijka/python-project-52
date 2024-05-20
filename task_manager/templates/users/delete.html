@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+    <p>{% trans "Are you sure you want to delete" %} {{ object }}?</p>
+        <form method="post">
+            <input type="submit" value="Delete">
+        </form>
+{% endblock main %}
