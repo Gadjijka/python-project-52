@@ -20,17 +20,19 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.get_full_name }}</td>
-            <td>{{ user.date_joined }}</td>
-            <td>
-                <a href="{% url 'user_update' pk=user.id %}">{% trans "Update" %}</a>
-                <br>
-                <a href="{% url 'user_delete' pk=user.id %}">{% trans "Delete" %}</a>
-            </td>
-        </tr>
+        {% if user.username != 'root' %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.get_full_name }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>
+                    <a href="{% url 'user_update' pk=user.id %}">{% trans "Update" %}</a>
+                    <br>
+                    <a href="{% url 'user_delete' pk=user.id %}">{% trans "Delete" %}</a>
+                </td>
+            </tr>
+        {% endif %}
     {% endfor %}
     </tbody>
 </table>

@@ -23,16 +23,19 @@
                     <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary">{% trans "Task manager" %}</a></li>
                     <li><a href="{% url 'users' %}" class="nav-link px-2 text-white">{% trans "Users" %}</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'statuses' %}" class="nav-link px-2 text-white">{% trans "Statuses" %}</a></li>
-                        <li><a href="{% url 'labels' %}" class="nav-link px-2 text-white">{% trans "Labels" %}</a></li>
-                        <li><a href="{% url 'tasks' %}" class="nav-link px-2 text-white">{% trans "Tasks" %}</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">{% trans "Statuses" %}</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">{% trans "Labels" %}</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white">{% trans "Tasks" %}</a></li>
                     {% endif %}
                 </ul>
         
                 <div class="text-end">
                     {% if user.is_authenticated %}
                         <span class="text-white me-2">{{ user.username }}</span>
-                        <a href="{% url 'logout' %}" class="btn btn-outline-light me-2">{% trans "Logout" %}</a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
                     {% else %}
                         <a href="{% url 'login' %}" class="btn btn-outline-light me-2">{% trans "Log In" %}</a>
                         <a href="{% url 'user_create' %}" class="btn btn-primary">{% trans "Registration" %}</a>
