@@ -11,21 +11,25 @@ class ListStatusView(ListView):
     context_object_name = 'statuses'
 
 class CreateStatusView(CreateView):
+    template_name = 'registration/form.html'
     model = Status
     form_class = StatusForm
-    success_url = reverse_lazy('list_status')
+    success_url = reverse_lazy('statuses')
     success_message = 'Status was created'
-    extra_context = {'header': 'Create Status'}
+    extra_context = {'header': 'Create Status', 'button_text': 'Create status'}
 
 class UpdateStatusView(UpdateView):
+    template_name = 'registration/form.html'
     model = Status
     form_class = StatusForm
-    success_url = reverse_lazy('list_status')
+    success_url = reverse_lazy('statuses')
     success_message = 'Status was updated'
-    extra_context = {'header': 'Update status'}
+    extra_context = {'header': 'Update status', 'button_text': 'Update status'}
 
 class DeleteStatusView(DeleteView):
+    template_name = 'delete_form.html'
     model = Status
-    success_url = reverse_lazy('list_status')
+    success_url = reverse_lazy('statuses')
     success_message = 'Status was deleted'
-    extra_content = {'header': 'Delete status'}
+    protected_message = ('Impossible to delete status because it is in use')
+    extra_content = {'header': 'Delete status', 'button_text': 'Yes, delete'}
