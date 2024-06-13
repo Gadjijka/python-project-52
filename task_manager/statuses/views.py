@@ -3,8 +3,9 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from .models import Status
 from .forms import StatusForm
 from django.urls import reverse_lazy
-
+from task_manager.mixins import DeleteProtectionMixin, PermitModifyUserMixin
 # Create your views here.
+
 class ListStatusView(ListView):
     template_name = 'statuses/index.html'
     model = Status
@@ -26,10 +27,11 @@ class UpdateStatusView(UpdateView):
     success_message = 'Status was updated'
     extra_context = {'header': 'Update status', 'button_text': 'Update status'}
 
-class DeleteStatusView(DeleteView):
+class DeleteStatusView(DeleteView, DeleteProtectionMixin):
     template_name = 'delete_form.html'
     model = Status
     success_url = reverse_lazy('statuses')
+    protected_url = reverse_lazy('statuses')
     success_message = 'Status was deleted'
     protected_message = ('Impossible to delete status because it is in use')
     extra_content = {'header': 'Delete status', 'button_text': 'Yes, delete'}
