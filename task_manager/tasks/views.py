@@ -20,6 +20,10 @@ class CreateTaskView(CreateView):
     success_message = 'Task was created'
     extra_context = {'header': 'Create task', 'button_text': 'Create task'}
 
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
 
 class UpdateTaskView(UpdateView):
     template_name = 'registration/form.html'

@@ -24,3 +24,5 @@ class DeleteProtectionMixin(DeletionMixin):
         except ProtectedError:
             messages.error(request, self.protected_message)
             return redirect(self.protected_url)
+
+

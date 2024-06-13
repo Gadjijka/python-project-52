@@ -10,7 +10,7 @@ class Task(models.Model):
     creator = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Creator', related_name='creator')
     executor = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Executor', related_name='executor')
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name='Status', related_name='Status')
-    labels = models.ManyToManyField(Label, blank=True, verbose_name='Label', related_name='labels')
+    labels = models.ManyToManyField(Label, through='LabelTask', blank=True, verbose_name='Label', related_name='labels')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Date of creation')
 
 
@@ -20,3 +20,8 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Task'
         verbose_name_plural = 'Tasks'
+
+
+class LabelTask(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    label = models.ForeignKey(Label, on_delete=models.PROTECT)
