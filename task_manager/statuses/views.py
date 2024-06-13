@@ -27,7 +27,7 @@ class UpdateStatusView(UpdateView):
     success_message = 'Status was updated'
     extra_context = {'header': 'Update status', 'button_text': 'Update status'}
 
-class DeleteStatusView(DeleteView, DeleteProtectionMixin):
+class DeleteStatusView(DeleteProtectionMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Status
     success_url = reverse_lazy('statuses')

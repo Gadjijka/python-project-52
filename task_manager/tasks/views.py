@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView, D
 from .models import Task
 from .forms import TaskForm
 from django.urls import reverse_lazy
-from .mixins import PermitDeleteTaskMixin
+from task_manager.mixins import PermitModifyUserMixin
 
 # Create your views here.
 class ListTaskView(ListView):
@@ -20,9 +20,6 @@ class CreateTaskView(CreateView):
     success_message = 'Task was created'
     extra_context = {'header': 'Create task', 'button_text': 'Create task'}
 
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super().form_valid(form)
 
 class UpdateTaskView(UpdateView):
     template_name = 'registration/form.html'
@@ -32,7 +29,7 @@ class UpdateTaskView(UpdateView):
     success_message = 'Task was updated'
     extra_context = {'header': 'Update task', 'button_text': 'Update task'}
 
-class DeleteTaskView(DeleteView, PermitDeleteTaskMixin):
+class DeleteTaskView(PermitModifyUserMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
