@@ -9,7 +9,7 @@
             <div class="card-body">
 
                 <h1 class="text-center mb-4">{{ header }}</h1>
-                <p>{% trans "Are you sure you want to delete" %} {{ object }}?</p>
+                <p>Are you sure you want to delete {{ object }}?</p>
 
                 <form method="post">
                     {% csrf_token %}

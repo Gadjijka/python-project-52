@@ -37,12 +37,23 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
             model_name="task",
             name="labels",
             field=models.ManyToManyField(
                 blank=True,
                 related_name="label",
+                through="tasks.LabelTask",
+                to="labels.label",
+                verbose_name="Label",
+            ),
+        ),
+        migrations.AddField(
+            model_name="task",
+            name="labels",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="labels",
                 through="tasks.LabelTask",
                 to="labels.label",
                 verbose_name="Label",
