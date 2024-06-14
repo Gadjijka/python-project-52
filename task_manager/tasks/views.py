@@ -4,12 +4,15 @@ from .models import Task
 from .forms import TaskForm
 from django.urls import reverse_lazy
 from .mixins import PermitDeleteTaskMixin
+from django_filters.views import FilterView
+from .filter import TaskFilter
 
 # Create your views here.
-class ListTaskView(ListView):
+class ListTaskView(FilterView):
     template_name = 'tasks/index.html'
     model = Task
     context_object_name = 'tasks'
+    filterset_class = TaskFilter
     extra_context = {'button_text': 'Show'}
 
 class CreateTaskView(CreateView):
