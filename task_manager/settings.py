@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3&d#7o7y&_vbvx=l^w!hsu)95i4%(&nh60j)*(ytkvxhckt)(k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['webserver', 'localhost', '127.0.0.1', 'https://python-project-52-1-kmu4.onrender.com',]
+ALLOWED_HOSTS = ['webserver', 'localhost', '127.0.0.1', 'python-project-52-1-kmu4.onrender.com',]
 
 AUTH_USER_MODEL = 'users.User'
 # Application definition
