@@ -1,11 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
+from django.views.generic import CreateView, DeleteView, UpdateView, DetailView
 from .models import Task
 from .forms import TaskForm
 from django.urls import reverse_lazy
 from .mixins import PermitDeleteTaskMixin
 from django_filters.views import FilterView
 from .filter import TaskFilter
+
 
 # Create your views here.
 class ListTaskView(FilterView):
@@ -15,13 +15,15 @@ class ListTaskView(FilterView):
     filterset_class = TaskFilter
     extra_context = {'button_text': 'Show'}
 
+
 class CreateTaskView(CreateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
     success_message = 'Task was created'
-    extra_context = {'header': 'Create task', 'button_text': 'Create task'}
+    extra_context = {'header': 'Create task',
+                     'button_text': 'Create task'}
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -34,14 +36,18 @@ class UpdateTaskView(UpdateView):
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
     success_message = 'Task was updated'
-    extra_context = {'header': 'Update task', 'button_text': 'Update task'}
+    extra_context = {'header': 'Update task',
+                     'button_text': 'Update task'}
+
 
 class DeleteTaskView(PermitDeleteTaskMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
     success_message = 'Task was deleted'
-    extra_content = {'header': 'Delete task', 'button_text': 'Yes, delete'}
+    extra_context = {'header': 'Delete task',
+                     'button_text': 'Yes, delete'}
+
 
 class DetailTaskView(DetailView):
     template_name = 'tasks/task_detail.html'

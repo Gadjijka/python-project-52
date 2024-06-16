@@ -6,8 +6,10 @@ from django.contrib.auth.views import LoginView, LogoutView
 from task_manager.mixins import PermitModifyUserMixin
 # Create your views here.
 
+
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy('home')
+
 
 class UserLoginView(LoginView):
     template_name = 'registration/form.html'
@@ -28,7 +30,7 @@ class UserCreateView(CreateView):
     form_class = RegisterUserForm
     success_url = reverse_lazy('login')
     success_message = 'User is successfully registered'
-    extra_context = {'header':'Registration', 'button_text': 'Sign up'}
+    extra_context = {'header': 'Registration', 'button_text': 'Sign up'}
 
 
 class UserUpdateView(PermitModifyUserMixin, UpdateView):

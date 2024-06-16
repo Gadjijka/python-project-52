@@ -3,6 +3,7 @@ from .models import Task
 from task_manager.labels.models import Label
 from django import forms
 
+
 class TaskFilter(django_filters.FilterSet):
     own_tasks = django_filters.BooleanFilter(
         method='show_own_task',
@@ -19,7 +20,6 @@ class TaskFilter(django_filters.FilterSet):
     def show_own_task(self, queryset, arg, value):
         user = self.request.user if self.request else None
         return queryset.filter(creator=user) if value else queryset
-
 
     class Meta:
         model = Task

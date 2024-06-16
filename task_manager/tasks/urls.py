@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import CreateTaskView, ListTaskView, UpdateTaskView, DetailTaskView, DeleteTaskView
+from .views import (CreateTaskView, ListTaskView,
+                    UpdateTaskView, DetailTaskView, DeleteTaskView)
 
-#app_name="statuses"
 
 urlpatterns = [
     path('', ListTaskView.as_view(), name='tasks'),

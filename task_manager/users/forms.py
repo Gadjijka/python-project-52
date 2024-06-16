@@ -6,7 +6,8 @@ from django import forms
 class RegisterUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
+        fields = ('first_name', 'last_name',
+                  'username', 'password1', 'password2')
 
 
 PASS_WIDGET = forms.PasswordInput(attrs={'class': 'form-control'})
@@ -14,12 +15,19 @@ PASS_WIDGET = forms.PasswordInput(attrs={'class': 'form-control'})
 
 class UpdateUserForm(UserChangeForm):
     password = None
-    password1 = forms.CharField(label='Password', widget=PASS_WIDGET, help_text='Your password should be longer 3 characters')
-    password2 = forms.CharField(label='Password Confirmation', widget=PASS_WIDGET, help_text='Enter your password again')
+    password1 = forms.CharField(
+                label='Password',
+                widget=PASS_WIDGET,
+                help_text='Your password should be longer 3 characters')
+    password2 = forms.CharField(
+                label='Password Confirmation',
+                widget=PASS_WIDGET,
+                help_text='Enter your password again')
 
     class Meta(UserChangeForm.Meta):
         model = User
-        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
+        fields = ('first_name', 'last_name',
+                  'username', 'password1', 'password2')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('pssword1')
