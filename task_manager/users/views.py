@@ -1,5 +1,7 @@
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from task_manager.views import (CustomCreateView,
+                                CustomUpdateView, CustomDeleteView)
 from .models import User
+from django.views.generic import ListView
 from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
@@ -24,7 +26,7 @@ class UsersListView(ListView):
     context_object_name = 'users'
 
 
-class UserCreateView(CreateView):
+class UserCreateView(CustomCreateView):
     template_name = 'registration/form.html'
     model = User
     form_class = RegisterUserForm
@@ -33,7 +35,7 @@ class UserCreateView(CreateView):
     extra_context = {'header': 'Registration', 'button_text': 'Sign up'}
 
 
-class UserUpdateView(PermitModifyUserMixin, UpdateView):
+class UserUpdateView(PermitModifyUserMixin, CustomUpdateView):
     template_name = 'registration/form.html'
     model = User
     form_class = UpdateUserForm
@@ -42,7 +44,7 @@ class UserUpdateView(PermitModifyUserMixin, UpdateView):
     extra_context = {'header': 'Update user', 'button_text': 'Update'}
 
 
-class UserDeleteView(PermitModifyUserMixin, DeleteView):
+class UserDeleteView(PermitModifyUserMixin, CustomDeleteView):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
