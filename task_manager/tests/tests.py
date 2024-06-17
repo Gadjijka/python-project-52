@@ -1,10 +1,6 @@
 from django.test import TestCase
-from task_manager.tasks.models import Task
 from task_manager.users.models import User
-from task_manager.statuses.models import Status
-from task_manager.labels.models import Label
 from django.urls import reverse
-import json
 from django.contrib.auth import get_user_model
 
 
@@ -26,24 +22,14 @@ class UserTestCase(TestCase):
                            }
 
     def test_create(self):
-        response = self.client.post(reverse('user_create'),
-                                    data=json.dumps(self.new_user),
-                                    content_type='application/json'
-                                   )
+        response = self.client.get(reverse('user_create'))
         self.assertTemplateUsed(response, 'registration/form.html')
         self.assertEqual(response.status_code, 200)
-
-
-    def test_users_list(self):
-        response = self.client.get(reverse('users'))
+        response = self.client.post(reverse('user_create'),
+                                    data=self.new_user,
+                                    follow=True
+                                   )
+        self.assertRedirects(response, reverse('login'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/index.html')
-        self.assertContains(response, 'Ivan')
+        self.assertContains(response, 'User is successfully registered')
 
-#    def test_update(self):
-#        self.client.force_login(get_user_model().objects.get(pk=1))
-#        response = self.client.post(reverse('user_update'),
-#                                    data=json.dumps(self.update_user),
-#                                    content_type='application/json'
-#                                   )
-#        self.assertEqual(response.status_code, 200)
