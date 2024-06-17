@@ -1,7 +1,6 @@
-from task_manager.views import (CustomCreateView,
+from task_manager.views import (CustomCreateView, CustomListView,
                                 CustomUpdateView, CustomDeleteView)
 from .models import User
-from django.views.generic import ListView
 from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
@@ -20,7 +19,7 @@ class UserLoginView(LoginView):
     extra_context = {'header': 'Log In', 'button_text': 'Login'}
 
 
-class UsersListView(ListView):
+class UsersListView(CustomListView):
     template_name = 'users/index.html'
     model = User
     context_object_name = 'users'

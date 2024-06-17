@@ -1,5 +1,6 @@
 from django.views.generic import (TemplateView, CreateView,
-                                  UpdateView, DeleteView)
+                                  UpdateView, DeleteView,
+                                  ListView)
 
 
 class IndexView(TemplateView):
@@ -15,4 +16,8 @@ class CustomUpdateView(UpdateView):
 
 
 class CustomDeleteView(DeleteView):
+    pass
+
+
+class CustomListView(ListView):
     pass

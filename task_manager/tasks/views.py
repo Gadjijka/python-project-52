@@ -1,4 +1,7 @@
-from django.views.generic import CreateView, DeleteView, UpdateView, DetailView
+from django.views.generic import DetailView
+from task_manager.views import (
+    CustomCreateView, CustomUpdateView, CustomDeleteView
+)
 from .models import Task
 from .forms import TaskForm
 from django.urls import reverse_lazy
@@ -16,7 +19,7 @@ class ListTaskView(FilterView):
     extra_context = {'button_text': 'Show'}
 
 
-class CreateTaskView(CreateView):
+class CreateTaskView(CustomCreateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -30,7 +33,7 @@ class CreateTaskView(CreateView):
         return super().form_valid(form)
 
 
-class UpdateTaskView(UpdateView):
+class UpdateTaskView(CustomUpdateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -40,7 +43,7 @@ class UpdateTaskView(UpdateView):
                      'button_text': 'Update task'}
 
 
-class DeleteTaskView(PermitDeleteTaskMixin, DeleteView):
+class DeleteTaskView(PermitDeleteTaskMixin, CustomDeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
