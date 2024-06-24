@@ -1,5 +1,5 @@
 from django.views.generic import (ListView, CreateView,
-                                UpdateView, DeleteView)
+                                  UpdateView, DeleteView)
 from .models import User
 from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
@@ -12,6 +12,11 @@ from django.contrib import messages
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy('home')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            messages.info(request, "You have successfully logged out.")
+        return super().dispatch(request, *args, **kwargs)
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):

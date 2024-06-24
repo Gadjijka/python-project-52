@@ -18,7 +18,7 @@ class ListTaskView(FilterView):
     extra_context = {'button_text': 'Show'}
 
 
-class CreateTaskView(SuccessMessageMixin, CustomCreateView):
+class CreateTaskView(SuccessMessageMixin, CreateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -32,7 +32,7 @@ class CreateTaskView(SuccessMessageMixin, CustomCreateView):
         return super().form_valid(form)
 
 
-class UpdateTaskView(SuccessMessageMixin, CustomUpdateView):
+class UpdateTaskView(SuccessMessageMixin, UpdateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -42,7 +42,7 @@ class UpdateTaskView(SuccessMessageMixin, CustomUpdateView):
                      'button_text': 'Update task'}
 
 
-class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin, CustomDeleteView):
+class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')

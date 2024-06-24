@@ -20,7 +20,7 @@ class UserTestCase(TestCase):
                             'password': '19gmr72lp24',
                            }
 
-    def test_create(self):
+    def test_user_create(self):
         response = self.client.get(reverse('user_create'))
         self.assertTemplateUsed(response, 'registration/form.html')
         self.assertEqual(response.status_code, 200)
@@ -32,3 +32,6 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'User is successfully registered')
 
+
+    def tests_user_update(self):
+        response = self.client
