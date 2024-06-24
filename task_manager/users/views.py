@@ -1,5 +1,5 @@
-from task_manager.views import (CustomCreateView, CustomListView,
-                                CustomUpdateView, CustomDeleteView)
+from django.views.generic import (ListView, CreateView,
+                                UpdateView, DeleteView)
 from .models import User
 from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
@@ -21,13 +21,13 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     extra_context = {'header': 'Log In', 'button_text': 'Login'}
 
 
-class UsersListView(CustomListView):
+class UsersListView(ListView):
     template_name = 'users/index.html'
     model = User
     context_object_name = 'users'
 
 
-class UserCreateView(SuccessMessageMixin, CustomCreateView):
+class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = 'registration/form.html'
     model = User
     form_class = RegisterUserForm
@@ -36,7 +36,7 @@ class UserCreateView(SuccessMessageMixin, CustomCreateView):
     extra_context = {'header': 'Registration', 'button_text': 'Sign up'}
 
 
-class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, CustomUpdateView):
+class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, UpdateView):
     template_name = 'registration/form.html'
     model = User
     form_class = UpdateUserForm
@@ -45,7 +45,7 @@ class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, CustomUpdateVie
     extra_context = {'header': 'Update user', 'button_text': 'Update'}
 
 
-class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin, CustomDeleteView):
+class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
