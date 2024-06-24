@@ -1,6 +1,6 @@
-from task_manager.views import (
-    CustomCreateView, CustomUpdateView, CustomDeleteView,
-    CustomListView
+from django.views.generic import (
+    CreateView, UpdateView, DeleteView,
+    ListView
 )
 from .models import Status
 from .forms import StatusForm
@@ -9,13 +9,13 @@ from task_manager.mixins import DeleteProtectionMixin
 # Create your views here.
 
 
-class ListStatusView(CustomListView):
+class ListStatusView(ListView):
     template_name = 'statuses/index.html'
     model = Status
     context_object_name = 'statuses'
 
 
-class CreateStatusView(CustomCreateView):
+class CreateStatusView(CreateView):
     template_name = 'registration/form.html'
     model = Status
     form_class = StatusForm
@@ -24,7 +24,7 @@ class CreateStatusView(CustomCreateView):
     extra_context = {'header': 'Create Status', 'button_text': 'Create status'}
 
 
-class UpdateStatusView(CustomUpdateView):
+class UpdateStatusView(UpdateView):
     template_name = 'registration/form.html'
     model = Status
     form_class = StatusForm
@@ -33,7 +33,7 @@ class UpdateStatusView(CustomUpdateView):
     extra_context = {'header': 'Update status', 'button_text': 'Update status'}
 
 
-class DeleteStatusView(DeleteProtectionMixin, CustomDeleteView):
+class DeleteStatusView(DeleteProtectionMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Status
     success_url = reverse_lazy('statuses')
