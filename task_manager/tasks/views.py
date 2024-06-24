@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from .mixins import PermitDeleteTaskMixin
 from django_filters.views import FilterView
 from .filter import TaskFilter
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Create your views here.
@@ -17,7 +18,7 @@ class ListTaskView(FilterView):
     extra_context = {'button_text': 'Show'}
 
 
-class CreateTaskView(CustomCreateView):
+class CreateTaskView(SuccessMessageMixin, CustomCreateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -31,7 +32,7 @@ class CreateTaskView(CustomCreateView):
         return super().form_valid(form)
 
 
-class UpdateTaskView(CustomUpdateView):
+class UpdateTaskView(SuccessMessageMixin, CustomUpdateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -41,7 +42,7 @@ class UpdateTaskView(CustomUpdateView):
                      'button_text': 'Update task'}
 
 
-class DeleteTaskView(PermitDeleteTaskMixin, CustomDeleteView):
+class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin, CustomDeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
