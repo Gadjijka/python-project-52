@@ -1,6 +1,6 @@
-from task_manager.views import (
-    CustomCreateView, CustomUpdateView, CustomDeleteView,
-    CustomListView
+from django.views.generic import (
+    CreateView, UpdateView, DeleteView,
+    ListView
 )
 from django.urls import reverse_lazy
 from .models import Label
