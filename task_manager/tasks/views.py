@@ -1,7 +1,5 @@
-from django.views.generic import DetailView
-from task_manager.views import (
-    CustomCreateView, CustomUpdateView, CustomDeleteView
-)
+from django.views.generic import (DetailView, CreateView,
+                                  UpdateView, DeleteView)
 from .models import Task
 from .forms import TaskForm
 from django.urls import reverse_lazy
