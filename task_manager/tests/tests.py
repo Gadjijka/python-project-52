@@ -7,14 +7,13 @@ from django.contrib.auth import get_user_model
 class UserTestCase(TestCase):
     def setUp(self):
         self.new_user = {
-                         'pk': 1,
                          'first_name': 'Ivan',
                          'last_name': 'Ivanov',
                          'username': 'IvIv',
-                         'password': '19gmr72lp24'
+                         'password1': '19gmr72lp24',
+                         'password2': '19gmr72lp24',
                         }
         self.update_user = {
-                            'pk': 2,
                             'first_name': 'Kirill',
                             'last_name': 'Ushakov',
                             'username': 'KiUs',

@@ -5,6 +5,8 @@ from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from task_manager.mixins import PermitModifyUserMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 # Create your views here.
 
 
@@ -12,7 +14,7 @@ class UserLogoutView(LogoutView):
     next_page = reverse_lazy('home')
 
 
-class UserLoginView(LoginView):
+class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'registration/form.html'
     next_page = reverse_lazy('home')
     success_message = 'User is logged in'
@@ -25,7 +27,7 @@ class UsersListView(CustomListView):
     context_object_name = 'users'
 
 
-class UserCreateView(CustomCreateView):
+class UserCreateView(SuccessMessageMixin, CustomCreateView):
     template_name = 'registration/form.html'
     model = User
     form_class = RegisterUserForm
@@ -34,7 +36,7 @@ class UserCreateView(CustomCreateView):
     extra_context = {'header': 'Registration', 'button_text': 'Sign up'}
 
 
-class UserUpdateView(PermitModifyUserMixin, CustomUpdateView):
+class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, CustomUpdateView):
     template_name = 'registration/form.html'
     model = User
     form_class = UpdateUserForm
@@ -43,7 +45,7 @@ class UserUpdateView(PermitModifyUserMixin, CustomUpdateView):
     extra_context = {'header': 'Update user', 'button_text': 'Update'}
 
 
-class UserDeleteView(PermitModifyUserMixin, CustomDeleteView):
+class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin, CustomDeleteView):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
