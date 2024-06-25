@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from task_manager.users.models import User
 from django.urls import reverse
 from django.contrib.auth import get_user_model
@@ -17,8 +17,12 @@ class UserTestCase(TestCase):
                             'first_name': 'Kirill',
                             'last_name': 'Ushakov',
                             'username': 'KiUs',
-                            'password': '19gmr72lp24',
+                            'password1': '19gmr72lp24',
+                            'password2': '19gmr72lp24',
                            }
+        self.client = Client()
+
+
 
     def test_user_create(self):
         response = self.client.get(reverse('user_create'))
@@ -31,7 +35,15 @@ class UserTestCase(TestCase):
         self.assertRedirects(response, reverse('login'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'User is successfully registered')
+        last_user = User.objects.last()
+        count_users = User.objects.count()
+        self.assertEqual(last_user.first_name, 'Ivan')
+        self.assertEqual(count_users, 1)
 
 
-    def tests_user_update(self):
-        response = self.client
+    def test_update_user(self):
+        self.client.force_login(get_user_model().objects.get(pk=1))
+        response = self.client.post(reverse('user_update', kwargs={'id':1}),
+                                    data=self.update_user)
+        self.assertRedirects(response, reverse('users'))
+        self.assertEqual(response.status_code, 200)
