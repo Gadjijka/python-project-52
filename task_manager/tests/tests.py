@@ -20,9 +20,6 @@ class UserTestCase(TestCase):
                             'password1': '19gmr72lp24',
                             'password2': '19gmr72lp24',
                            }
-        self.client = Client()
-
-
 
     def test_user_create(self):
         response = self.client.get(reverse('user_create'))
@@ -40,10 +37,24 @@ class UserTestCase(TestCase):
         self.assertEqual(last_user.first_name, 'Ivan')
         self.assertEqual(count_users, 1)
 
-
-    def test_update_user(self):
-        self.client.force_login(get_user_model().objects.get(pk=1))
-        response = self.client.post(reverse('user_update', kwargs={'id':1}),
-                                    data=self.update_user)
-        self.assertRedirects(response, reverse('users'))
+    def test_read(self):
+        response = self.client.get(reverse('users'))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Milana_Ismailova_')
+
+    def test_update(self):
+        self.client.force_login(get_user_model().objects.get(id=1))
+        response = self.client.get(reverse('user_update', kwargs={'id': 1}))
+        self.assertTemplateUsed(response, 'registration/form.html')
+        response = self.client.post(reverse('user_update', kwargs={'pk': 1}),
+                                    data=self.update_user,)
+        self.assertRedirects(response, reverse('users'))
+        self.assertEqual(User.objects.get(pk=1).username, 'KiUs')
+
+    def test_delete(self):
+        self.client.force_login(get_user_model().objects.get(id=1))
+        response = self.client.get(reverse('user_delete', kwargs={'id': 1}))
+        self.assertTemplateUsed(response, 'delete_form.html')
+        response = self.client.post(reverse('user_delete', kwargs={'pk': 1}))
+        self.assertRedirects(response, reverse('users'))
+        self.assertContains(response, 'User successfully deleted')
