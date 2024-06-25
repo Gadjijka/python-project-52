@@ -47,7 +47,7 @@ class UserTestCase(TestCase):
         response = self.client.get(reverse('user_update', kwargs={'id': 1}))
         self.assertTemplateUsed(response, 'registration/form.html')
         response = self.client.post(reverse('user_update', kwargs={'pk': 1}),
-                                    data=self.update_user,)
+                                    data=self.update_user, follow=True)
         self.assertRedirects(response, reverse('users'))
         self.assertEqual(User.objects.get(pk=1).username, 'KiUs')
 
@@ -55,6 +55,6 @@ class UserTestCase(TestCase):
         self.client.force_login(get_user_model().objects.get(id=1))
         response = self.client.get(reverse('user_delete', kwargs={'id': 1}))
         self.assertTemplateUsed(response, 'delete_form.html')
-        response = self.client.post(reverse('user_delete', kwargs={'pk': 1}))
+        response = self.client.post(reverse('user_delete', kwargs={'pk': 1}), follow=True)
         self.assertRedirects(response, reverse('users'))
         self.assertContains(response, 'User successfully deleted')
