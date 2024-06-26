@@ -5,6 +5,8 @@ from django.contrib.auth import get_user_model
 
 
 class UserTestCase(TestCase):
+    fixtures = ['users.json',]
+
     def setUp(self):
         self.new_user = {
                          'first_name': 'Ivan',
