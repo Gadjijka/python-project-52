@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-04 01:52+0300\n"
+"POT-Creation-Date: 2024-07-04 02:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-
 #: task_manager/labels/models.py:7 task_manager/statuses/models.py:6
 #: task_manager/tasks/models.py:10 task_manager/templates/labels/index.html:19
 #: task_manager/templates/statuses/index.html:15
@@ -32,8 +31,6 @@ msgid "Date of creation"
 msgstr "Дата создания"
 
 #: task_manager/labels/models.py:15 task_manager/tasks/filter.py:16
-#, fuzzy
-#| msgid "Labels"
 msgid "Label"
 msgstr "Метка"
 
@@ -69,7 +66,7 @@ msgstr "Изменение метки"
 #: task_manager/tasks/views.py:43 task_manager/templates/labels/index.html:31
 #: task_manager/templates/statuses/index.html:28
 #: task_manager/templates/tasks/index.html:47
-#: task_manager/templates/users/index.html:30 task_manager/users/views.py:51
+#: task_manager/templates/users/index.html:30 task_manager/users/views.py:35
 msgid "Update"
 msgstr "Изменить"
 
@@ -86,7 +83,7 @@ msgid "Delete Label"
 msgstr "Удаление метки"
 
 #: task_manager/labels/views.py:45 task_manager/statuses/views.py:45
-#: task_manager/tasks/views.py:52 task_manager/users/views.py:61
+#: task_manager/tasks/views.py:52 task_manager/users/views.py:45
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
@@ -143,8 +140,6 @@ msgid "Show own tasks"
 msgstr "Только свои задачи"
 
 #: task_manager/tasks/models.py:12
-#, fuzzy
-#| msgid "Registration"
 msgid "Description"
 msgstr "Описание"
 
@@ -158,8 +153,6 @@ msgid "Executor"
 msgstr "Исполнитель"
 
 #: task_manager/tasks/models.py:38
-#, fuzzy
-#| msgid "Tasks"
 msgid "Task"
 msgstr "Задача"
 
@@ -213,11 +206,11 @@ msgstr "Пользователи"
 msgid "Logout"
 msgstr "Выход"
 
-#: task_manager/templates/base.html:40 task_manager/users/views.py:27
+#: task_manager/templates/base.html:40 task_manager/views.py:21
 msgid "Log In"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:41 task_manager/users/views.py:42
+#: task_manager/templates/base.html:41 task_manager/users/views.py:26
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -304,47 +297,45 @@ msgid "Enter your password again"
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
 #: task_manager/users/models.py:11
-#, fuzzy
-#| msgid "Users"
 msgid "User"
-msgstr "Пользователи"
+msgstr "Пользователь"
 
-#: task_manager/users/views.py:19
-msgid "You have successfully logged out."
-msgstr "Вы разлогинены"
-
-#: task_manager/users/views.py:26
-msgid "User is logged in"
-msgstr "Вы залогинены"
-
-#: task_manager/users/views.py:27
-msgid "login"
-msgstr "Войти"
-
-#: task_manager/users/views.py:41
+#: task_manager/users/views.py:25
 msgid "User is successfully registered"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:42
+#: task_manager/users/views.py:26
 msgid "Sign up"
 msgstr "Зарегистрировать"
 
-#: task_manager/users/views.py:50
+#: task_manager/users/views.py:34
 msgid "User is successfully updated"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/views.py:51
+#: task_manager/users/views.py:35
 msgid "Update user"
 msgstr "Изменение пользователя"
 
-#: task_manager/users/views.py:58
+#: task_manager/users/views.py:42
 msgid "User successfully deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/views.py:59
+#: task_manager/users/views.py:43
 msgid "Cannot delete a user because it is in use"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: task_manager/users/views.py:61
+#: task_manager/users/views.py:45
 msgid "Delete user"
 msgstr "Удаление пользователя"
+
+#: task_manager/views.py:13
+msgid "You have successfully logged out."
+msgstr "Вы разлогинены"
+
+#: task_manager/views.py:20
+msgid "User is logged in"
+msgstr "Вы залогинены"
+
+#: task_manager/views.py:21
+msgid "login"
+msgstr "Войти"
