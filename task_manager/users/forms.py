@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import User
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 
 class RegisterUserForm(UserCreationForm):
@@ -16,13 +17,13 @@ PASS_WIDGET = forms.PasswordInput(attrs={'class': 'form-control'})
 class UpdateUserForm(UserChangeForm):
     password = None
     password1 = forms.CharField(
-                label='Password',
+                label=_('Password'),
                 widget=PASS_WIDGET,
-                help_text='Your password should be longer 3 characters')
+                help_text=_('Your password should be longer 3 characters'))
     password2 = forms.CharField(
-                label='Password Confirmation',
+                label=_('Password Confirmation'),
                 widget=PASS_WIDGET,
-                help_text='Enter your password again')
+                help_text=_('Enter your password again'))
 
     class Meta(UserChangeForm.Meta):
         model = User
