@@ -13,4 +13,3 @@ htmlcov/
 coverage.xml
 .env
 env/
-locale
