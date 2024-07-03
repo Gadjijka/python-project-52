@@ -7,6 +7,7 @@ from .forms import StatusForm
 from django.urls import reverse_lazy
 from task_manager.mixins import DeleteProtectionMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import gettext as _
 # Create your views here.
 
 
@@ -21,8 +22,8 @@ class CreateStatusView(SuccessMessageMixin, CreateView):
     model = Status
     form_class = StatusForm
     success_url = reverse_lazy('statuses')
-    success_message = 'Status was created'
-    extra_context = {'header': 'Create Status', 'button_text': 'Create status'}
+    success_message = _('Status was created')
+    extra_context = {'header': _('Create status'), 'button_text': _('Create')}
 
 
 class UpdateStatusView(SuccessMessageMixin, UpdateView):
@@ -30,8 +31,8 @@ class UpdateStatusView(SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
     success_url = reverse_lazy('statuses')
-    success_message = 'Status was updated'
-    extra_context = {'header': 'Update status', 'button_text': 'Update status'}
+    success_message = _('Status was updated')
+    extra_context = {'header': _('Update status'), 'button_text': _('Update')}
 
 
 class DeleteStatusView(DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
@@ -39,6 +40,6 @@ class DeleteStatusView(DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
     model = Status
     success_url = reverse_lazy('statuses')
     protected_url = reverse_lazy('statuses')
-    success_message = 'Status was deleted'
-    protected_message = ('Impossible to delete status because it is in use')
-    extra_context = {'header': 'Delete status', 'button_text': 'Yes, delete'}
+    success_message = _('Status was deleted')
+    protected_message = _('Impossible to delete status because it is in use')
+    extra_context = {'header': _('Delete status'), 'button_text': _('Yes, delete')}

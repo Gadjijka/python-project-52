@@ -7,6 +7,7 @@ from .mixins import PermitDeleteTaskMixin
 from django_filters.views import FilterView
 from .filter import TaskFilter
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import gettext as _
 
 
 # Create your views here.
@@ -15,7 +16,7 @@ class ListTaskView(FilterView):
     model = Task
     context_object_name = 'tasks'
     filterset_class = TaskFilter
-    extra_context = {'button_text': 'Show'}
+    extra_context = {'button_text': _('Show')}
 
 
 class CreateTaskView(SuccessMessageMixin, CreateView):
@@ -23,9 +24,9 @@ class CreateTaskView(SuccessMessageMixin, CreateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
-    success_message = 'Task was created'
-    extra_context = {'header': 'Create task',
-                     'button_text': 'Create task'}
+    success_message = _('Task was created')
+    extra_context = {'header': _('Create task'),
+                     'button_text': _('Create')}
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -37,18 +38,18 @@ class UpdateTaskView(SuccessMessageMixin, UpdateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
-    success_message = 'Task was updated'
-    extra_context = {'header': 'Update task',
-                     'button_text': 'Update task'}
+    success_message = _('Task was updated')
+    extra_context = {'header': _('Update task'),
+                     'button_text': _('Update')}
 
 
 class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
-    success_message = 'Task was deleted'
-    extra_context = {'header': 'Delete task',
-                     'button_text': 'Yes, delete'}
+    success_message = _('Task was deleted')
+    extra_context = {'header': _('Delete task'),
+                     'button_text': _('Yes, delete')}
 
 
 class DetailTaskView(DetailView):

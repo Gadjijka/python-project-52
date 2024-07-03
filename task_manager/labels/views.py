@@ -7,6 +7,7 @@ from .models import Label
 from .forms import LabelForm
 from task_manager.mixins import DeleteProtectionMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import gettext as _
 # Create your views here.
 
 
@@ -21,8 +22,8 @@ class LabelCreateView(SuccessMessageMixin, CreateView):
     model = Label
     form_class = LabelForm
     success_url = reverse_lazy('labels')
-    success_message = 'Label was created'
-    extra_context = {'header': 'Create Label', 'button_text': 'create label'}
+    success_message = _('Label was created')
+    extra_context = {'header': _('Create Label'), 'button_text': _('Create')}
 
 
 class LabelUpdateView(SuccessMessageMixin, UpdateView):
@@ -30,8 +31,8 @@ class LabelUpdateView(SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
     success_url = reverse_lazy('labels')
-    success_message = 'Labels was updated'
-    extra_context = {'header': 'Update Label', 'button_text': 'update label'}
+    success_message = _('Label was updated')
+    extra_context = {'header': _('Update Label'), 'button_text': _('Update')}
 
 
 class LabelDeleteView(DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
@@ -39,6 +40,6 @@ class LabelDeleteView(DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
     model = Label
     success_url = reverse_lazy('labels')
     protected_url = reverse_lazy('labels')
-    success_message = 'Label was deleted'
-    protected_message = 'Impossible to delete because it is in use'
-    extra_context = {'header': 'Delete Label', 'button_text': 'Yes, delete'}
+    success_message = _('Label was deleted')
+    protected_message = _('Impossible to delete because it is in use')
+    extra_context = {'header': _('Delete Label'), 'button_text': _('Yes, delete')}

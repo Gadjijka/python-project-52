@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.db.models import ProtectedError
 from django.views.generic.edit import DeletionMixin
+from django.utils.translation import gettext as _
 
 
 class PermitModifyUserMixin(UserPassesTestMixin):
@@ -11,7 +12,7 @@ class PermitModifyUserMixin(UserPassesTestMixin):
         return self.get_object().id == self.request.user.id
 
     def handle_no_permission(self):
-        message = 'You do not have permissions to modify user'
+        message = _('You do not have permissions to modify user')
         messages.error(self.request, message)
         return redirect(reverse_lazy('users'))
 

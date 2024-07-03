@@ -7,6 +7,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from task_manager.mixins import PermitModifyUserMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.utils.translation import gettext as _
 # Create your views here.
 
 
@@ -15,15 +16,15 @@ class UserLogoutView(LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            messages.info(request, "You have successfully logged out.")
+            messages.info(request, _("You have successfully logged out."))
         return super().dispatch(request, *args, **kwargs)
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'registration/form.html'
     next_page = reverse_lazy('home')
-    success_message = 'User is logged in'
-    extra_context = {'header': 'Log In', 'button_text': 'Login'}
+    success_message = _('User is logged in')
+    extra_context = {'header': _('Log In'), 'button_text': _('login')}
 
 
 class UsersListView(ListView):
@@ -37,8 +38,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
     form_class = RegisterUserForm
     success_url = reverse_lazy('login')
-    success_message = 'User is successfully registered'
-    extra_context = {'header': 'Registration', 'button_text': 'Sign up'}
+    success_message = _('User is successfully registered')
+    extra_context = {'header': _('Registration'), 'button_text': _('Sign up')}
 
 
 class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, UpdateView):
@@ -46,15 +47,15 @@ class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UpdateUserForm
     success_url = reverse_lazy('users')
-    success_message = 'User is successfully updated'
-    extra_context = {'header': 'Update user', 'button_text': 'Update'}
+    success_message = _('User is successfully updated')
+    extra_context = {'header': _('Update user'), 'button_text': _('Update')}
 
 
 class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
-    success_message = 'User successfully deleted'
-    protected_message = 'Cannot delete a user because it is in use'
+    success_message = _('User successfully deleted')
+    protected_message = _('Cannot delete a user because it is in use')
     protected_url = reverse_lazy('users')
-    extra_context = {'header': 'Delete user', 'button_text': 'Yes, delete'}
+    extra_context = {'header': _('Delete user'), 'button_text': _('Yes, delete')}
