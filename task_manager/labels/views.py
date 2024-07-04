@@ -8,6 +8,7 @@ from .forms import LabelForm
 from task_manager.mixins import DeleteProtectionMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -17,7 +18,7 @@ class LabelsListView(ListView):
     context_object_name = 'labels'
 
 
-class LabelCreateView(SuccessMessageMixin, CreateView):
+class LabelCreateView(SuccessMessageMixin,LoginRequiredMixin, CreateView):
     template_name = 'registration/form.html'
     model = Label
     form_class = LabelForm
@@ -26,7 +27,7 @@ class LabelCreateView(SuccessMessageMixin, CreateView):
     extra_context = {'header': _('Create Label'), 'button_text': _('Create')}
 
 
-class LabelUpdateView(SuccessMessageMixin, UpdateView):
+class LabelUpdateView(SuccessMessageMixin,LoginRequiredMixin UpdateView):
     template_name = 'registration/form.html'
     model = Label
     form_class = LabelForm
@@ -35,7 +36,7 @@ class LabelUpdateView(SuccessMessageMixin, UpdateView):
     extra_context = {'header': _('Update Label'), 'button_text': _('Update')}
 
 
-class LabelDeleteView(DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
+class LabelDeleteView(DeleteProtectionMixin,LoginRequiredMixin SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Label
     success_url = reverse_lazy('labels')
