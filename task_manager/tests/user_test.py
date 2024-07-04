@@ -8,19 +8,19 @@ class UserTestCase(TestCase):
 
     def setUp(self):
         self.new_user = {
-                            'first_name': 'Kirill',
-                            'last_name': 'Ushakov',
-                            'username': 'KiUs',
-                            'password1': '19gmr72lp24',
-                            'password2': '19gmr72lp24',
-                           }
+            'first_name': 'Kirill',
+            'last_name': 'Ushakov',
+            'username': 'KiUs',
+            'password1': '19gmr72lp24',
+            'password2': '19gmr72lp24',
+            }
         User.objects.create(
-                            id=110,
-                            first_name='Ivan',
-                            last_name='Ivanov',
-                            username='IvIv',
-                            password='19gmr72lp24'
-                           )
+            id=110,
+            first_name='Ivan',
+            last_name='Ivanov',
+            username='IvIv',
+            password='19gmr72lp24'
+            )
 
     def test_user_create(self):
         response = self.client.get(reverse('user_create'))
@@ -29,7 +29,7 @@ class UserTestCase(TestCase):
         response = self.client.post(reverse('user_create'),
                                     data=self.new_user,
                                     follow=True
-                                   )
+                                    )
         self.assertRedirects(response, reverse('login'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'User is successfully registered')
@@ -52,6 +52,9 @@ class UserTestCase(TestCase):
 
     def test_delete(self):
         self.client.force_login(get_user_model().objects.get(id=110))
-        response = self.client.post(reverse('user_delete', kwargs={'pk': 110}), follow=True)
+        response = self.client.post(reverse('user_delete',
+                                    kwargs={'pk': 110}),
+                                    follow=True
+                                    )
         self.assertRedirects(response, reverse('users'))
         self.assertContains(response, 'User successfully deleted')

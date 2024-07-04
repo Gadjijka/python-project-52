@@ -17,13 +17,13 @@ PASS_WIDGET = forms.PasswordInput(attrs={'class': 'form-control'})
 class UpdateUserForm(UserChangeForm):
     password = None
     password1 = forms.CharField(
-                label=_('Password'),
-                widget=PASS_WIDGET,
-                help_text=_('Your password should be longer 3 characters'))
+        label=_('Password'),
+        widget=PASS_WIDGET,
+        help_text=_('Your password should be longer 3 characters'))
     password2 = forms.CharField(
-                label=_('Password Confirmation'),
-                widget=PASS_WIDGET,
-                help_text=_('Enter your password again'))
+        label=_('Password Confirmation'),
+        widget=PASS_WIDGET,
+        help_text=_('Enter your password again'))
 
     class Meta(UserChangeForm.Meta):
         model = User

@@ -36,11 +36,13 @@ class LabelUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     extra_context = {'header': _('Update Label'), 'button_text': _('Update')}
 
 
-class LabelDeleteView(DeleteProtectionMixin, LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class LabelDeleteView(DeleteProtectionMixin, LoginRequiredMixin,
+                      SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Label
     success_url = reverse_lazy('labels')
     protected_url = reverse_lazy('labels')
     success_message = _('Label was deleted')
     protected_message = _('Impossible to delete because it is in use')
-    extra_context = {'header': _('Delete Label'), 'button_text': _('Yes, delete')}
+    extra_context = {'header': _('Delete Label'),
+                     'button_text': _('Yes, delete')}

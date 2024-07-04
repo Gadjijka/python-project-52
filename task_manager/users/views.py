@@ -3,10 +3,8 @@ from django.views.generic import (ListView, CreateView,
 from .models import User
 from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView, LogoutView
 from task_manager.mixins import PermitModifyUserMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
 from django.utils.translation import gettext as _
 # Create your views here.
 
@@ -42,4 +40,5 @@ class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin, DeleteView):
     success_message = _('User successfully deleted')
     protected_message = _('Cannot delete a user because it is in use')
     protected_url = reverse_lazy('users')
-    extra_context = {'header': _('Delete user'), 'button_text': _('Yes, delete')}
+    extra_context = {'header': _('Delete user'),
+                     'button_text': _('Yes, delete')}

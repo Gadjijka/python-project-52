@@ -44,4 +44,5 @@ class DeleteStatusView(LoginRequiredMixin, DeleteProtectionMixin,
     protected_url = reverse_lazy('statuses')
     success_message = _('Status was deleted')
     protected_message = _('Impossible to delete status because it is in use')
-    extra_context = {'header': _('Delete status'), 'button_text': _('Yes, delete')}
+    extra_context = {'header': _('Delete status'),
+                     'button_text': _('Yes, delete')}
