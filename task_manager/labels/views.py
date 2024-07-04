@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-class LabelsListView(ListView):
+class LabelsListView(LoginRequiredMixin, ListView):
     template_name = 'labels/index.html'
     model = Label
     context_object_name = 'labels'
