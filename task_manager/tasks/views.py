@@ -8,10 +8,11 @@ from django_filters.views import FilterView
 from .filter import TaskFilter
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
-class ListTaskView(FilterView):
+class ListTaskView(LoginRequiredMixin, FilterView):
     template_name = 'tasks/index.html'
     model = Task
     context_object_name = 'tasks'
@@ -19,7 +20,8 @@ class ListTaskView(FilterView):
     extra_context = {'button_text': _('Show')}
 
 
-class CreateTaskView(SuccessMessageMixin, CreateView):
+class CreateTaskView(SuccessMessageMixin, LoginRequiredMixin,
+                     CreateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -33,7 +35,8 @@ class CreateTaskView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class UpdateTaskView(SuccessMessageMixin, UpdateView):
+class UpdateTaskView(SuccessMessageMixin, LoginRequiredMixin,
+                     UpdateView):
     template_name = 'registration/form.html'
     model = Task
     form_class = TaskForm
@@ -43,7 +46,8 @@ class UpdateTaskView(SuccessMessageMixin, UpdateView):
                      'button_text': _('Update')}
 
 
-class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin, DeleteView):
+class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin,
+                     LoginRequiredMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Task
     success_url = reverse_lazy('tasks')
@@ -52,6 +56,6 @@ class DeleteTaskView(PermitDeleteTaskMixin, SuccessMessageMixin, DeleteView):
                      'button_text': _('Yes, delete')}
 
 
-class DetailTaskView(DetailView):
+class DetailTaskView(LoginRequiredMixin, DetailView):
     template_name = 'tasks/task_detail.html'
     model = Task
