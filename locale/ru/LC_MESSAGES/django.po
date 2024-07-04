@@ -56,7 +56,7 @@ msgstr "Создать"
 
 #: task_manager/labels/views.py:34
 msgid "Label was updated"
-msgstr "Метка успешно создана"
+msgstr "Метка успешно изменена"
 
 #: task_manager/labels/views.py:35
 msgid "Update Label"
