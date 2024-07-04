@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
+from django.urls import reverse_lazy
 
 load_dotenv()
 
@@ -156,3 +157,5 @@ ROLLBAR = {
     'code_version': '1.0.0',
     'root': BASE_DIR,
 }
+
+LOGIN_URL = reverse_lazy('login')
