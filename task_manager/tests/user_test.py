@@ -13,14 +13,14 @@ class UserTestCase(TestCase):
             'username': 'KiUs',
             'password1': '19gmr72lp24',
             'password2': '19gmr72lp24',
-            }
+        }
         User.objects.create(
             id=110,
             first_name='Ivan',
             last_name='Ivanov',
             username='IvIv',
             password='19gmr72lp24'
-            )
+        )
 
     def test_user_create(self):
         response = self.client.get(reverse('user_create'))
