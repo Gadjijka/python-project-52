@@ -3,7 +3,8 @@ from django.views.generic import (ListView, CreateView,
 from .models import User
 from .forms import RegisterUserForm, UpdateUserForm
 from django.urls import reverse_lazy
-from task_manager.mixins import PermitModifyUserMixin
+from task_manager.mixins import (PermitModifyUserMixin,
+                                 DeleteProtectionMixin)
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 # Create your views here.
@@ -33,7 +34,8 @@ class UserUpdateView(PermitModifyUserMixin, SuccessMessageMixin, UpdateView):
     extra_context = {'header': _('Update user'), 'button_text': _('Update')}
 
 
-class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin, DeleteView):
+class UserDeleteView(PermitModifyUserMixin, SuccessMessageMixin,
+                     DeleteProtectionMixin, DeleteView):
     template_name = 'delete_form.html'
     model = User
     success_url = reverse_lazy('users')
