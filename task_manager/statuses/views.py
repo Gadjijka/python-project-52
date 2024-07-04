@@ -27,7 +27,7 @@ class CreateStatusView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     extra_context = {'header': _('Create status'), 'button_text': _('Create')}
 
 
-class UpdateStatusView(SuccessMessageMixin, UpdateView):
+class UpdateStatusView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'registration/form.html'
     model = Status
     form_class = StatusForm
@@ -36,7 +36,8 @@ class UpdateStatusView(SuccessMessageMixin, UpdateView):
     extra_context = {'header': _('Update status'), 'button_text': _('Update')}
 
 
-class DeleteStatusView(DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
+class DeleteStatusView(LoginRequiredMixin, DeleteProtectionMixin,
+                       SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Status
     success_url = reverse_lazy('statuses')

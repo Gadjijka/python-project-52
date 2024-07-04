@@ -158,4 +158,4 @@ ROLLBAR = {
     'root': BASE_DIR,
 }
 
-LOGIN_URL = reverse_lazy('login')
+LOGIN_URL = 'login'
