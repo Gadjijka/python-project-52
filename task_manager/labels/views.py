@@ -18,7 +18,7 @@ class LabelsListView(ListView):
     context_object_name = 'labels'
 
 
-class LabelCreateView(SuccessMessageMixin,LoginRequiredMixin, CreateView):
+class LabelCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     template_name = 'registration/form.html'
     model = Label
     form_class = LabelForm
@@ -27,7 +27,7 @@ class LabelCreateView(SuccessMessageMixin,LoginRequiredMixin, CreateView):
     extra_context = {'header': _('Create Label'), 'button_text': _('Create')}
 
 
-class LabelUpdateView(SuccessMessageMixin,LoginRequiredMixin UpdateView):
+class LabelUpdateView(SuccessMessageMixin, LoginRequiredMixin UpdateView):
     template_name = 'registration/form.html'
     model = Label
     form_class = LabelForm
@@ -36,7 +36,7 @@ class LabelUpdateView(SuccessMessageMixin,LoginRequiredMixin UpdateView):
     extra_context = {'header': _('Update Label'), 'button_text': _('Update')}
 
 
-class LabelDeleteView(DeleteProtectionMixin,LoginRequiredMixin SuccessMessageMixin, DeleteView):
+class LabelDeleteView(DeleteProtectionMixin, LoginRequiredMixin SuccessMessageMixin, DeleteView):
     template_name = 'delete_form.html'
     model = Label
     success_url = reverse_lazy('labels')
