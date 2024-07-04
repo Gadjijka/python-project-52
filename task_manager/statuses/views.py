@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from task_manager.mixins import DeleteProtectionMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -17,7 +18,7 @@ class ListStatusView(ListView):
     context_object_name = 'statuses'
 
 
-class CreateStatusView(SuccessMessageMixin, CreateView):
+class CreateStatusView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'registration/form.html'
     model = Status
     form_class = StatusForm
