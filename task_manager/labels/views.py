@@ -9,7 +9,6 @@ from task_manager.mixins import DeleteProtectionMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
-# Create your views here.
 
 
 class LabelsListView(LoginRequiredMixin, ListView):
