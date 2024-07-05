@@ -7,7 +7,6 @@ from task_manager.mixins import (PermitModifyUserMixin,
                                  DeleteProtectionMixin)
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
-# Create your views here.
 
 
 class UsersListView(ListView):
