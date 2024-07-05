@@ -11,7 +11,6 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-# Create your views here.
 class ListTaskView(LoginRequiredMixin, FilterView):
     template_name = 'tasks/index.html'
     model = Task
