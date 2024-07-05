@@ -13,3 +13,4 @@ htmlcov/
 coverage.xml
 .env
 env/
+db.sqlite3
