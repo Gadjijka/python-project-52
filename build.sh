@@ -9,4 +9,4 @@ poetry install
 python manage.py migrate
 
 # Компиляция сообщений для локалей
-python manage.py compilemessage
+python manage.py compilemessages
