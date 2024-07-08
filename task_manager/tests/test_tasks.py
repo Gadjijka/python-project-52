@@ -51,4 +51,3 @@ class StatusTestCase(TestCase):
                                     )
         self.assertRedirects(response, reverse('tasks'))
         self.assertContains(response, _('Task was deleted'))
-
