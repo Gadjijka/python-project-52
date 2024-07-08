@@ -28,7 +28,7 @@ jobs:
       - name: Test & publish code coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: "sqlite:///:memory:"
         run: |
           make test
           make test-coverage
