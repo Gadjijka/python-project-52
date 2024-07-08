@@ -30,7 +30,7 @@ jobs:
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          DATABASE_URL: "postgresql://db_for_python_project_52_user:UCLhii8dykh0ue6SUW9SFu2vGVx8Wm5X@dpg-cq4rvvtds78s73cp6ml0-a.oregon-postgres.render.com/db_for_python_project_52"
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         with:
           coverageCommand: make test-coverage
           debug: true
