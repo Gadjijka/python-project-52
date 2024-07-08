@@ -1,5 +1,5 @@
 start:
-	python3 manage.py runserver
+	gunicorn task_manager.wsgi:application
 
 install:
 	poetry install
