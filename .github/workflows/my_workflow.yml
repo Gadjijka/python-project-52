@@ -2,7 +2,6 @@ name: Python CI
 
 on:
   - push
-  - pull_request
 
 jobs:
   build:
@@ -12,6 +11,12 @@ jobs:
         # we want to test our package on several versions of Python
         python-version: [3.10.12]
     steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+        # make depends on poetry
       - name: Install dependencies
         run: |
           pip install poetry
@@ -19,6 +24,7 @@ jobs:
       - name: Run linter and pytest
         run: |
           make lint
+          make test
       - name: Test & publish code coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
